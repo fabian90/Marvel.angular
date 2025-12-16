@@ -1,0 +1,22 @@
+
+<div class="container mx-auto">
+  <h1 class="text-4xl font-bold text-center mb-8 text-white">Mis Pokémon Favoritos</h1>
+
+  @if (favoritesService.loading()) {
+    <div class="text-center p-8">
+       <div class="animate-spin h-12 w-12 mx-auto border-t-4 border-r-4 border-red-500 rounded-full"></div>
+       <p class="mt-4 text-lg">Buscando tus favoritos...</p>
+    </div>
+  } @else if (favoritesService.favorites().length === 0) {
+    <div class="text-center p-8 bg-gray-800 rounded-lg">
+      <p class="text-xl text-gray-400">Aún no has añadido ningún favorito.</p>
+      <p class="text-gray-500 mt-2">¡Haz clic en el icono del corazón en un Pokémon para añadirlo a tu lista!</p>
+    </div>
+  } @else {
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+      @for (pokemon of favoritesService.favorites(); track pokemon.id) {
+        <app-pokemon-card [pokemonData]="pokemon"></app-pokemon-card>
+      }
+    </div>
+  }
+</div>

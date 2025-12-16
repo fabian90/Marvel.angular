@@ -1,0 +1,33 @@
+
+<div class="container mx-auto">
+  <h1 class="text-4xl font-bold text-center mb-8 text-white">Pokédex</h1>
+
+  @if (loading()) {
+    <div class="text-center p-8">
+       <div class="animate-spin h-12 w-12 mx-auto border-t-4 border-r-4 border-red-500 rounded-full"></div>
+       <p class="mt-4 text-lg">Atrapándolos a todos...</p>
+    </div>
+  } @else if (error()) {
+    <div class="p-4 bg-red-900 border border-red-700 text-red-200 rounded-md text-center">
+      {{ error() }}
+    </div>
+  } @else {
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+      @for (pokemon of pokemonList(); track pokemon.name) {
+        <app-pokemon-card [pokemonUrl]="pokemon.url"></app-pokemon-card>
+      }
+    </div>
+
+    <div class="flex justify-between items-center mt-8">
+      <button (click)="previousPage()" [disabled]="offset() === 0" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed">
+        Anterior
+      </button>
+      <span class="text-gray-400">
+        Mostrando {{ offset() + 1 }} - {{ offset() + pokemonList().length }} de {{ totalPokemon() }}
+      </span>
+      <button (click)="nextPage()" [disabled]="offset() + limit >= totalPokemon()" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed">
+        Siguiente
+      </button>
+    </div>
+  }
+</div>

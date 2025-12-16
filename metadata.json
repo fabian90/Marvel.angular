@@ -1,0 +1,5 @@
+{
+  "name": "Pokédex con Angular",
+  "description": "Una aplicación Pokédex moderna construida con Angular y Tailwind CSS, que permite a los usuarios explorar Pokémon, ver sus detalles y gestionar una lista de sus favoritos.",
+  "requestFramePermissions": []
+}
